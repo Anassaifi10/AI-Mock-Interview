@@ -16,7 +16,7 @@ const initFirebaseAdmin = () => {
             })
         })
     }
-    console.log("Firebase Admin Initialized",apps)
+    // console.log("Firebase Admin Initialized",apps)
     return{
         auth:getAuth(),
         db:getFirestore(),
