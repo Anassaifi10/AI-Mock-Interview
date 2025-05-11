@@ -5,7 +5,22 @@ import Image from 'next/image'
 import { dummyInterviews } from '@/constants'
 import { Inter } from 'next/font/google'
 import InterviewCard from '@/components/InterviewCard'
-function page() {
+import { getCurrentUser } from '@/lib/actions/auth.action'
+import { getInterviewsByUserId, getLatestInterviews } from '@/lib/actions/general.action'
+async function page() {
+   const user = await getCurrentUser();
+
+  // const [userInterviews, allInterview] = await Promise.all([  
+  //   getInterviewsByUserId(user?.id!),
+  //   getLatestInterviews({ userId: user?.id! }),
+  // ]);
+
+  // const hasPastInterviews = userInterviews?.length! > 0;
+  // const hasUpcomingInterviews = allInterview?.length! > 0;
+
+  const interview=await getLatestInterviews({ userId: user?.id! })
+  console.log(interview)
+
   return (
     <>
       <section className="card-cta">
