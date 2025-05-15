@@ -103,7 +103,6 @@ export async function getLatestInterviews(
     .limit(limit)
     .get();
 
-    console.log(interviews);
   if (interviews.empty) return null;
   return interviews.docs.map((doc) => ({
     id: doc.id,

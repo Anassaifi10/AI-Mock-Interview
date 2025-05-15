@@ -7,7 +7,7 @@ const SESSION_DURATION = 60 * 60 * 24 * 7;
 export async function signUp(params:SignUpParams) {
     
     const {email,name,password,uid}=params;
-
+    debugger;
     try
     {
         const userRecord=await db.collection("users").doc(uid).get();
@@ -67,7 +67,7 @@ export async function signUp(params:SignUpParams) {
 
         return {
             error:true,
-            message:"Something went wrong while signing up"
+            message:"Something went wrong while signing up "+e.message
         }
 
 
@@ -99,7 +99,7 @@ export async function setSessionCookie(idToken: string) {
   
 export async function signIn(params: SignInParams) {
     const { email, idToken } = params;
-  
+
     try {
       const userRecord = await auth.getUserByEmail(email);
       if (!userRecord)
@@ -110,7 +110,6 @@ export async function signIn(params: SignInParams) {
   
       await setSessionCookie(idToken);
     } catch (error: any) {
-      console.log("");
   
       return {
         success: false,

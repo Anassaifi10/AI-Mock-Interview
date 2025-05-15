@@ -43,16 +43,15 @@ function AuthForm({ type }: { type: FormType }) {
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            console.log(values)
+            // console.log(values)
             if (type === 'sign-up') {
                 const { name, email, password } = values;
-                console.log(auth)
+                debugger;
                 const userCredential = await createUserWithEmailAndPassword(
                     auth,
                     email,
                     password
                 );
-                console.log(userCredential.user.uid)
                 const result = await signUp({
                     uid: userCredential.user.uid,
                     name: name!,
@@ -62,8 +61,11 @@ function AuthForm({ type }: { type: FormType }) {
                 if (!result.success) {
                     toast.error(result.message);
                 }
-                toast.success("sign up successfully lets Sign in");
-                router.push('/sign-in');
+                else
+                {
+                    toast.success("sign up successfully lets Sign in");
+                    router.push('/sign-in');
+                }
             } else {
                 const { email, password } = values;
                 const userCredential = await signInWithEmailAndPassword(
@@ -71,13 +73,12 @@ function AuthForm({ type }: { type: FormType }) {
                     email,
                     password
                   );
-          
                   const idToken = await userCredential.user.getIdToken();
                   if (!idToken) {
                     toast.error("Sign in Failed. Please try again.");
                     return;
                   }
-          
+                 debugger;
                   await signIn({
                     email,
                     idToken,

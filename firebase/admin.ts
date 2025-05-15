@@ -6,6 +6,7 @@ const initFirebaseAdmin = () => {
 
 
     const apps=getApps();
+    // console.log(apps)
     if(!apps.length)
     {
         initializeApp({
